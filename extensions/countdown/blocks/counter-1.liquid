@@ -1,0 +1,94 @@
+<div class="countdown-addon" data-countdown-end-date="{{ block.settings.countdown_end_date }}" style="background: url('{{ block.settings.background_image | img_url }}') no-repeat center center; ">
+  <h2 style="color: #333;">{{ block.settings.counter_title }}</h2>
+  <p style="color: #333;">{{ block.settings.counter_subtitle }}</p>
+  <div class="countdown-timer">
+    {% if block.settings.show_days %}
+      <div class="time days">00</div><span>:</span>
+    {% endif %}
+    {% if block.settings.show_hours %}
+      <div class="time hours">00</div><span>:</span>
+    {% endif %}
+    {% if block.settings.show_minutes %}
+      <div class="time minutes">00</div><span>:</span>
+    {% endif %}
+    {% if block.settings.show_seconds %}
+      <div class="time seconds">00</div>
+    {% endif %}
+  </div>
+  {% if block.settings.show_cta %}
+    <a href="{{ block.settings.cta_link }}" class="cta-button">CTA Button</a>
+  {% endif %}
+</div>
+
+
+
+{% schema %}
+{
+  "name": "Countdown Timer",
+  "target": "section",
+  "stylesheet": "counter.css",
+  "javascript": "counter.js",
+  "class": "countdown-timer-block",  
+  "settings": [
+    {
+      "type": "text",
+      "id": "counter_title",
+      "label": "Hello Text",
+      "default": "Hello, this is a simple text from the county extension!"
+    },
+    {
+      "type": "text",
+      "id": "counter_subtitle",
+      "label": "Hello Content",
+      "default": "Hello, this is a simple content!"
+    },
+    {
+      "type": "text",
+      "id": "countdown_end_date",
+      "label": "Countdown End Date",
+      "default": "23-03-2024"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_days",
+      "label": "Show Days",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hours",
+      "label": "Show Hours",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_minutes",
+      "label": "Show Minutes",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_seconds",
+      "label": "Show Seconds",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show CTA Button",
+      "default": true
+    }
+  ]
+}
+
+{% endschema %}

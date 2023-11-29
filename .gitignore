@@ -12,6 +12,10 @@ bun.lockb
 /.pnp
 .pnp.js
 
+# extensions
+extensions/package.json
+extensions/node_modules
+
 # testing
 /coverage
 
