@@ -17,7 +17,7 @@
     "pretty": "prettier --write ./",
     "update": "ncu -u",
     "update:url": "node _developer/updateDashboard.js",
-    "ngrok:auth": "ngrok authtoken <auth-token-goes-here>",
+    "ngrok:auth": "ngrok authtoken 2YQhABdn7AnpmB3q9nnJhTu9BUQ_CdBa6ncuXC7UC7iw9rvv",
     "ngrok": "ngrok http 3000",
     "-----> Shopify <-----": "",
     "g:install": "npm i -g @shopify/app@latest @shopify/cli@latest",
