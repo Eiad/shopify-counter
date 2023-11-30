@@ -1,5 +1,5 @@
 import useFetch from "@/components/hooks/useFetch";
-import { DataTable, Layout, LegacyCard, Page } from "@shopify/polaris";
+import { DataTable, Layout, Card, Page } from "@shopify/polaris";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -28,7 +28,7 @@ const BillingAPI = () => {
     >
       <Layout>
         <Layout.Section>
-          <LegacyCard
+          <Card
             sectioned
             primaryFooterAction={{
               content: "Subscribe merchant",
@@ -46,7 +46,7 @@ const BillingAPI = () => {
               /* If we have an error, it'll pop up here. */
               responseData && <p>{responseData}</p>
             }
-          </LegacyCard>
+          </Card>
         </Layout.Section>
         <Layout.Section>
           <ActiveSubscriptions />
@@ -67,6 +67,7 @@ const ActiveSubscriptions = () => {
     let rowsData = [];
     const activeSubscriptions =
       data.body.data.appInstallation.activeSubscriptions;
+    console.log("Result: ", activeSubscriptions);
 
     if (activeSubscriptions.length === 0) {
       rowsData.push(["No Plan", "N/A", "N/A", "USD 0.00"]);
@@ -86,13 +87,13 @@ const ActiveSubscriptions = () => {
   }, []);
 
   return (
-    <LegacyCard title="Active Subscriptions" sectioned>
+    <Card title="Active Subscriptions" sectioned>
       <DataTable
         columnContentTypes={["text", "text", "text", "text"]}
         headings={["Plan Name", "Status", "Test", "Amount"]}
         rows={rows}
       />
-    </LegacyCard>
+    </Card>
   );
 };
 
