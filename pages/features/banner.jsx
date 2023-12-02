@@ -1,75 +1,56 @@
 import { useState } from "react";
-
 import {
-  Page,
-  Layout,
-  Card,
-  TextField,
   Button,
-  Banner,
+  Card,
+  Form,
+  FormLayout,
+  TextField,
+  Page,
 } from "@shopify/polaris";
+import useFetch from "@/components/hooks/useFetch";
 
-const BannerPage = () => {
-  const [bannerHtml, setBannerHtml] = useState("");
-  const [feedback, setFeedback] = useState(null);
+const BannerFeature = () => {
+  const [htmlSnippet, setHtmlSnippet] = useState("");
+  const fetch = useFetch();
+  const [status, setStatus] = useState("");
 
-  const submitBannerHtml = async () => {
-    setFeedback(null); // Clear any existing feedback
+  const handleSubmit = async () => {
     try {
       const response = await fetch("/api/update-theme", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ htmlToInject: bannerHtml }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ htmlSnippet }),
       });
 
       if (response.ok) {
-        const data = await response.json();
-        setFeedback({
-          status: "success",
-          message: data.message || "HTML snippet added successfully!",
-        });
+        setStatus("Theme updated successfully");
       } else {
-        // If the response is not OK, handle it accordingly
-        console.error("Response not OK with status: ", response.status);
-        setFeedback({
-          status: "failure",
-          message: `Failed to add the HTML snippet. Status code: ${response.status}`,
-        });
+        setStatus("Failed to update theme");
       }
     } catch (error) {
-      console.error("Request failed with error: ", error);
-      setFeedback({ status: "failure", message: error.toString() });
+      console.error(error);
+      setStatus("Error occurred while updating theme");
     }
   };
 
   return (
-    <Page title="Add Banner HTML">
-      <Layout>
-        <Layout.Section>
-          <Card sectioned>
+    <Page title="Banner Feature">
+      <Card sectioned>
+        <Form onSubmit={handleSubmit}>
+          <FormLayout>
             <TextField
-              label="Banner HTML"
-              value={bannerHtml}
-              onChange={(newValue) => setBannerHtml(newValue)}
+              label="HTML Snippet"
+              value={htmlSnippet}
+              onChange={setHtmlSnippet}
               multiline={4}
-              placeholder="<div>Your HTML content here</div>"
             />
-            <Button primary onClick={submitBannerHtml}>
-              Submit
-            </Button>
-            {feedback && (
-              <Banner
-                title={feedback.message}
-                status={feedback.status === "success" ? "success" : "critical"}
-              />
-            )}
-          </Card>
-        </Layout.Section>
-      </Layout>
+            <Button submit>Update Theme</Button>
+          </FormLayout>
+        </Form>
+        {status && <p>{status}</p>}
+      </Card>
     </Page>
   );
 };
 
-export default BannerPage;
+export default BannerFeature;

@@ -1,0 +1,4 @@
+DB User: nm93e8ezije0bwz9031f
+DB PW: pscale_pw_qcyBAIogHCYaP5htnFYfscid8kjiMavY3n1KjRqesAO
+
+DATABASE_URL='mysql://nm93e8ezije0bwz9031f:pscale_pw_qcyBAIogHCYaP5htnFYfscid8kjiMavY3n1KjRqesAO@aws.connect.psdb.cloud/counter?sslaccept=strict'

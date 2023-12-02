@@ -23,6 +23,10 @@ const verifyProxy = async (req, res, next) => {
     .update(queryURI, "utf-8")
     .digest("hex");
 
+  // Log the calculatedSignature and the signature from the request
+  console.log("Calculated Signature:", calculatedSignature);
+  console.log("Signature from Request:", signature);
+
   if (calculatedSignature === signature) {
     req.user_shop = req.query.shop; //myshopify domain
     await next();
